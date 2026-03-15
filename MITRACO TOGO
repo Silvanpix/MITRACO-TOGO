@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitraco Togo</title>
+<style>
+    body {font-family:Arial,sans-serif; margin:0; padding:0; background:#fff; color:#333;}
+    header {background:#2E8B57; color:#fff; padding:20px; text-align:center;}
+    header h1 {margin:0;}
+    nav {text-align:center; margin-top:10px;}
+    nav a {color:#fff; text-decoration:none; margin:0 15px; font-weight:bold;}
+    nav a:hover {text-decoration:underline;}
+    section {padding:50px 20px; max-width:1000px; margin:0 auto;}
+    section:nth-child(even){background:#f2f2f2;}
+    h2{color:#2E8B57; text-align:center; margin-bottom:20px;}
+    p, ul{text-align:center;}
+    ul{list-style:none; padding:0;}
+    ul li{padding:5px 0;}
+    #bureau-status{text-align:center; font-weight:bold; font-size:1.2em; color:green;}
+    footer{text-align:center; padding:20px; background:#2E8B57; color:#fff;}
+    @media(max-width:600px){nav a{display:block; margin:10px 0;}}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Mitraco Togo</h1>
+    <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="#apropos">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="accueil">
+    <h2>Bienvenue chez Mitraco Togo</h2>
+    <p>Votre partenaire de confiance pour le transit et la gestion des marchandises à Lomé et à l’international. Nous facilitons l’importation et l’exportation en assurant un service rapide, sûr et efficace.</p>
+</section>
+
+<section id="apropos">
+    <h2>Qui sommes-nous ?</h2>
+    <p>Fondée à Lomé, Mitraco Togo est spécialisée dans le transit, la manutention et la consignation de marchandises. Nous accompagnons nos clients à chaque étape du transport international.</p>
+</section>
+
+<section id="services">
+    <h2>Nos services</h2>
+    <ul>
+        <li>Transit international</li>
+        <li>Formalités douanières</li>
+        <li>Manutention</li>
+        <li>Conseil logistique</li>
+    </ul>
+</section>
+
+<section id="contact">
+    <h2>Contactez-nous</h2>
+    <p><strong>Personne à contacter :</strong> MIHEAYE AKUETE MAWUENA PAUL</p>
+    <p><strong>Email :</strong> contact@mitracotogo.tg</p>
+    <p><strong>Adresse :</strong> Notre Dame des Apôtres, Bè Kpéhenou, Lomé, Togo</p>
+    
+    <p id="bureau-status">Chargement de l'état du bureau...</p>
+</section>
+
+<footer>
+    &copy; 2026 Mitraco Togo. Tous droits réservés.
+</footer>
+
+<script>
+    const status = document.getElementById('bureau-status');
+    const h = new Date().getHours();
+    if(h >= 8 && h < 17){
+        status.textContent = "Bureau ouvert 🟢";
+        status.style.color = "green";
+    } else {
+        status.textContent = "Bureau fermé 🔴";
+        status.style.color = "red";
+    }
+</script>
+
+</body>
+</html>
