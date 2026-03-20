@@ -4,79 +4,252 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mitraco Togo</title>
+
 <style>
-    body {font-family:Arial,sans-serif; margin:0; padding:0; background:#fff; color:#333;}
-    header {background:#2E8B57; color:#fff; padding:20px; text-align:center;}
-    header h1 {margin:0;}
-    nav {text-align:center; margin-top:10px;}
-    nav a {color:#fff; text-decoration:none; margin:0 15px; font-weight:bold;}
-    nav a:hover {text-decoration:underline;}
-    section {padding:50px 20px; max-width:1000px; margin:0 auto;}
-    section:nth-child(even){background:#f2f2f2;}
-    h2{color:#2E8B57; text-align:center; margin-bottom:20px;}
-    p, ul{text-align:center;}
-    ul{list-style:none; padding:0;}
-    ul li{padding:5px 0;}
-    #bureau-status{text-align:center; font-weight:bold; font-size:1.2em; color:green;}
-    footer{text-align:center; padding:20px; background:#2E8B57; color:#fff;}
-    @media(max-width:600px){nav a{display:block; margin:10px 0;}}
+:root{
+--bg:#ffffff;
+--text:#333;
+--primary:#1f7a3d;
+--section:#f2f2f2;
+}
+
+.dark{
+--bg:#121212;
+--text:#ffffff;
+--section:#1e1e1e;
+}
+
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:var(--bg);
+color:var(--text);
+}
+
+header{
+background:var(--primary);
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.controls{
+margin-top:10px;
+}
+
+button{
+margin:5px;
+padding:6px 10px;
+cursor:pointer;
+}
+
+input{
+padding:5px;
+margin:5px;
+}
+
+section{
+padding:50px;
+max-width:1000px;
+margin:auto;
+}
+
+section:nth-child(even){
+background:var(--section);
+}
+
+h2{
+text-align:center;
+color:var(--primary);
+}
+
+ul{
+list-style:none;
+text-align:center;
+padding:0;
+}
+
+footer{
+background:var(--primary);
+color:white;
+text-align:center;
+padding:20px;
+}
+
+#status, #userStatus{
+text-align:center;
+font-weight:bold;
+margin-top:10px;
+}
+
 </style>
 </head>
+
 <body>
 
 <header>
-    <h1>Mitraco Togo</h1>
-    <nav>
-        <a href="#accueil">Accueil</a>
-        <a href="#apropos">À propos</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-    </nav>
+
+<h1>Mitraco Togo</h1>
+
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#apropos">À propos</a>
+<a href="#services">Services</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="controls">
+<button onclick="setLang('fr')">FR</button>
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('es')">ES</button>
+<button onclick="toggleDark()">🌙</button>
+</div>
+
+<!-- COMPTE SIMPLE -->
+<div>
+<input type="text" id="username" placeholder="Nom utilisateur">
+<input type="password" id="password" placeholder="Mot de passe">
+<button onclick="login()">Connexion</button>
+<button onclick="logout()">Déconnexion</button>
+</div>
+
+<p id="userStatus"></p>
+
 </header>
 
 <section id="accueil">
-    <h2>Bienvenue chez Mitraco Togo</h2>
-    <p>Votre partenaire de confiance pour le transit et la gestion des marchandises à Lomé et à l’international. Nous facilitons l’importation et l’exportation en assurant un service rapide, sûr et efficace.</p>
+<h2 id="title">Bienvenue</h2>
+<p id="desc">Votre partenaire de confiance pour le transit à Lomé.</p>
 </section>
 
 <section id="apropos">
-    <h2>Qui sommes-nous ?</h2>
-    <p>Fondée à Lomé, Mitraco Togo est spécialisée dans le transit, la manutention et la consignation de marchandises. Nous accompagnons nos clients à chaque étape du transport international.</p>
+<h2 id="about">À propos</h2>
+<p id="aboutText">Entreprise spécialisée en transit et douane.</p>
 </section>
 
 <section id="services">
-    <h2>Nos services</h2>
-    <ul>
-        <li>Transit international</li>
-        <li>Formalités douanières</li>
-        <li>Manutention</li>
-        <li>Conseil logistique</li>
-    </ul>
+<h2 id="servicesTitle">Services</h2>
+<ul id="servicesList">
+<li>Transit international</li>
+<li>Formalités douanières</li>
+<li>Logistique</li>
+</ul>
 </section>
 
 <section id="contact">
-    <h2>Contactez-nous</h2>
-    <p><strong>Personne à contacter :</strong> MIHEAYE AKUETE MAWUENA PAUL</p>
-    <p><strong>Email :</strong> contact@mitracotogo.tg</p>
-    <p><strong>Adresse :</strong> Notre Dame des Apôtres, Bè Kpéhenou, Lomé, Togo</p>
-    
-    <p id="bureau-status">Chargement de l'état du bureau...</p>
+<h2 id="contactTitle">Contact</h2>
+<p id="person">Personne à contacter : MIHEAYE AKUETE MAWUENA PAUL</p>
+<p id="address">Adresse : Lomé, Togo</p>
+
+<div id="status"></div>
 </section>
 
 <footer>
-    &copy; 2026 Mitraco Togo. Tous droits réservés.
+© 2026 Mitraco Togo
 </footer>
 
 <script>
-    const status = document.getElementById('bureau-status');
-    const h = new Date().getHours();
-    if(h >= 8 && h < 17){
-        status.textContent = "Bureau ouvert 🟢";
-        status.style.color = "green";
-    } else {
-        status.textContent = "Bureau fermé 🔴";
-        status.style.color = "red";
-    }
+
+// 🌙 MODE SOMBRE
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+
+// 🌍 LANGUES
+function setLang(lang){
+
+const data = {
+fr:{
+title:"Bienvenue",
+desc:"Votre partenaire de confiance pour le transit à Lomé.",
+about:"À propos",
+aboutText:"Entreprise spécialisée en transit et douane.",
+services:"Services",
+contact:"Contact",
+person:"Personne à contacter : MIHEAYE AKUETE MAWUENA PAUL",
+address:"Adresse : Lomé, Togo"
+},
+en:{
+title:"Welcome",
+desc:"Your trusted logistics partner in Lomé.",
+about:"About",
+aboutText:"Company specialized in customs and logistics.",
+services:"Services",
+contact:"Contact",
+person:"Contact person: MIHEAYE AKUETE MAWUENA PAUL",
+address:"Address: Lomé, Togo"
+},
+es:{
+title:"Bienvenido",
+desc:"Su socio de confianza en logística en Lomé.",
+about:"Sobre nosotros",
+aboutText:"Empresa especializada en aduanas.",
+services:"Servicios",
+contact:"Contacto",
+person:"Persona de contacto: MIHEAYE AKUETE MAWUENA PAUL",
+address:"Dirección: Lomé, Togo"
+}
+};
+
+document.getElementById("title").innerText=data[lang].title;
+document.getElementById("desc").innerText=data[lang].desc;
+document.getElementById("about").innerText=data[lang].about;
+document.getElementById("aboutText").innerText=data[lang].aboutText;
+document.getElementById("servicesTitle").innerText=data[lang].services;
+document.getElementById("contactTitle").innerText=data[lang].contact;
+document.getElementById("person").innerText=data[lang].person;
+document.getElementById("address").innerText=data[lang].address;
+}
+
+// 🟢 STATUT BUREAU
+const now = new Date();
+const hour = now.getHours();
+const status = document.getElementById("status");
+
+if(hour >= 8 && hour < 17){
+status.innerHTML = "🟢 Bureau ouvert";
+status.style.color = "green";
+}else{
+status.innerHTML = "🔴 Bureau fermé";
+status.style.color = "red";
+}
+
+// 👤 COMPTE SIMPLE
+function login(){
+const user = document.getElementById("username").value;
+
+if(user === ""){
+alert("Entre un nom");
+return;
+}
+
+localStorage.setItem("mitracoUser", user);
+
+document.getElementById("userStatus").innerText =
+"Connecté : " + user;
+}
+
+function logout(){
+localStorage.removeItem("mitracoUser");
+document.getElementById("userStatus").innerText =
+"Déconnecté";
+}
+
+window.onload = function(){
+const savedUser = localStorage.getItem("mitracoUser");
+if(savedUser){
+document.getElementById("userStatus").innerText =
+"Connecté : " + savedUser;
+}
+}
+
 </script>
 
 </body>
